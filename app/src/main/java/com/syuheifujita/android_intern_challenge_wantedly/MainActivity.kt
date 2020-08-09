@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val itemList = generateDummyList(6)
+        val itemList = generateDummyList(10)
 
         recyclerview.adapter = ItemAdapter(itemList)
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -22,11 +22,7 @@ class MainActivity : AppCompatActivity() {
     private fun generateDummyList(size: Int): List<ItemModel> {
         val list = ArrayList<ItemModel>()
         for (i in 0 until size) {
-            val drawable = when (i % 3) {
-                0 -> R.drawable.ic_launcher_background
-                1 -> R.drawable.ic_launcher_background
-                else -> R.drawable.ic_launcher_background
-            }
+            val drawable = R.drawable.ic_launcher_background
             val item = ItemModel(drawable, "Item $i")
             list += item
         }
