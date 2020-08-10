@@ -1,8 +1,8 @@
 package com.syuheifujita.android_intern_challenge_wantedly.api
 
-import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
+import com.syuheifujita.android_intern_challenge_wantedly.MainActivity
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
 import retrofit2.Call
@@ -13,8 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     val BASE_URL = "https://www.wantedly.com/"
-    private  var retrofit: Retrofit? = null
-    private lateinit var mSharePreferences: SharedPreferences
 
     fun getClient (language: String, page: Int) {
         val retrofit: Retrofit = Retrofit.Builder()
@@ -37,12 +35,8 @@ object ApiClient {
                     val itemList: ItemResponse? = response.body()
                     Log.i("Responseresult", "$itemList")
 
-                    val itemResponseJsonString = Gson().toJson(itemList)
-                    val editer = mSharePreferences.edit()
-                    editer.putString("Item", itemResponseJsonString)
-                    editer.apply()
-
-//                        setUpUI()
+//                    val itemResponseJsonString = Gson().toJson(itemList)
+//                    setUpUI()
                 } else {
                     val rc = response.code()
                     when(rc) {
@@ -62,6 +56,10 @@ object ApiClient {
         })
     }
 
-    private fun setUpUI() {
-    }
+//    fun setUpUI() {
+//        val itemList = Gson().fromJson("", ItemResponse::class.java)
+//        for (i in itemList.data.indices) {
+//            Log.i("Item Name", itemList.data[i].title)
+//        }
+//    }
 }

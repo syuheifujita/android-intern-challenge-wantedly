@@ -5,16 +5,18 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_recruit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:layout_weight="0.9"
         android:padding="@dimen/space_8dp">
 
         <ImageView
             android:id="@+id/iv_image_url"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.8"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -30,26 +32,26 @@
             android:layout_height="0dp"
             android:layout_weight="0.1"
             android:text="アプリエンジニアを探しています" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_company"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:orientation="horizontal">
+            android:src="@mipmap/ic_launcher"/>
 
-            <ImageView
-                android:id="@+id/iv_avatar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"
-                android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:id="@+id/tv_company_name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                android:text="Wantedly.inc" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_company_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:text="Wantedly.inc" />
     </LinearLayout>
 </LinearLayout>

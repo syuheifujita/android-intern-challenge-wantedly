@@ -5,10 +5,13 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient
+import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient.getClient
+import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemModel
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,13 +28,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: ItemAdapter
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         layoutManager = LinearLayoutManager(this)
         rv_item_list.layoutManager = layoutManager
 
+//        getClient("jave", 0)
         getQuery()
 
         //        mService = ApiClient.retrofitService
@@ -67,6 +73,9 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val itemList: ItemResponse? = response.body()
                     Log.i("Responseresult", "$itemList")
+
+//                    val itemResponseJsonString = Gson().toJson(itemList)
+//                    setUpUI()
                 } else {
                     val rc = response.code()
                     when(rc) {
@@ -84,6 +93,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    fun setUpUI() {
+        val itemList = Gson().fromJson("", ItemResponse::class.java)
+        for (i in itemList.data.indices) {
+            Log.i("Item Name", itemList.data[i].title)
+        }
     }
 
 //    private fun getItemList() {
