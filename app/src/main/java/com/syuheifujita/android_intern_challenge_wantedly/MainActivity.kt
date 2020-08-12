@@ -6,9 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
-import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
-import com.syuheifujita.android_intern_challenge_wantedly.model.*
+import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getClient (language: String, page: Int) {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(ApiClient.BASE_URL)
+            .baseUrl(Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service: ItemService = retrofit.create(ItemService::class.java)
