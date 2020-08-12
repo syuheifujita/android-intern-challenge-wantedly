@@ -1,17 +1,35 @@
 package com.syuheifujita.android_intern_challenge_wantedly
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.text.CaseMap
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.squareup.picasso.Picasso
-import com.syuheifujita.android_intern_challenge_wantedly.databinding.ItemViewBinding
+import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityRecyclerViewItemDetailBinding
+import com.syuheifujita.android_intern_challenge_wantedly.model.Avatar
 
 class RecyclerViewItemDetailActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRecyclerViewItemDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler_view_item_detail)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recycler_view_item_detail)
+
+        val imageUrl = intent.getStringExtra("image")
+        val lookingFor = intent.getStringExtra("lookingFor")
+        val title = intent.getStringExtra("title")
+        val avatar = intent.getStringExtra("avatar")
+        val companyName = intent.getStringExtra("companyName")
+
+        setImage(imageUrl, lookingFor, title, avatar, companyName)
+    }
+
+    private fun setImage(imageUrl: String, lookingFor: String, title: String, avatar: String, companyName: String) {
+        Picasso.get().load(imageUrl).into(binding.ivRvItemImageUrl)
+        binding.tvRvItemLookingFor.text = lookingFor
+        binding.tvRvItemTitle.text = title
+        Picasso.get().load(avatar).into(binding.ivRvItemAvatar)
+        binding.tvRvItemCompanyName.text = companyName
     }
 }

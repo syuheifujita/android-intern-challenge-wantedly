@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ItemViewBinding
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
+import kotlinx.android.synthetic.main.activity_recycler_view_item_detail.view.*
 
 class ItemAdapter(private val context: Context, private val itemList: ItemResponse): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
 
@@ -31,6 +32,11 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
 
         holder.binding.llRvItem.setOnClickListener {
             val intent = Intent(context, RecyclerViewItemDetailActivity::class.java)
+            intent.putExtra("image", currentItem.image.original)
+            intent.putExtra("lookingFor", currentItem.looking_for)
+            intent.putExtra("title", currentItem.title)
+            intent.putExtra("avatar", currentItem.company.avatar.original)
+            intent.putExtra("companyName", currentItem.company.name)
             context.startActivity(intent)
         }
     }
