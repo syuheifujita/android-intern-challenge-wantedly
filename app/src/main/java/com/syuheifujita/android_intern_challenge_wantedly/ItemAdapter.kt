@@ -23,10 +23,9 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = itemList.data[position]
 
-        holder.tvTitle.text = currentItem.title
-
         Picasso.get().load(currentItem.image.original).into(holder.ivImageUrl)
         holder.tvLookingFor.text = currentItem.looking_for
+        holder.tvTitle.text = currentItem.title
         Picasso.get().load(currentItem.company.avatar.original).into(holder.ivAvatar)
         holder.tvCompanyName.text = currentItem.company.name
 
