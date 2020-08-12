@@ -1,21 +1,13 @@
 package com.syuheifujita.android_intern_challenge_wantedly
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient
-import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient.getClient
-import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
-import com.syuheifujita.android_intern_challenge_wantedly.model.ItemModel
-import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
+import com.syuheifujita.android_intern_challenge_wantedly.model.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,105 +16,43 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mService: ItemService
-    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var adapter: ItemAdapter
-
-    private lateinit var binding: ActivityMainBinding
+//    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-        layoutManager = LinearLayoutManager(this)
-        rv_item_list.layoutManager = layoutManager
-
-//        getClient("jave", 0)
-        getQuery()
-
-        //        mService = ApiClient.retrofitService
-
-//        getItemList()
-
-//        val itemList = generateDummyList(10)
-//        recyclerview.adapter = ItemAdapter(itemList)
-//        recyclerview.layoutManager = LinearLayoutManager(this)
+        getClient("java", 3)
     }
 
-    private fun getQuery() {
-        getClient("java", 0)
-    }
-
-    fun getClient (language: String, page: Int) {
+    private fun getClient (language: String, page: Int) {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(ApiClient.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val service: ItemService = retrofit.create<ItemService>(ItemService::class.java)
-        val listCall: Call<ItemResponse> = service.getItem(language, page)
+        val service: ItemService = retrofit.create(ItemService::class.java)
 
-        listCall.enqueue(object : Callback<ItemResponse> {
+        service.getItem(language, page).enqueue(object : Callback<ItemResponse> {
             override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
                 Log.e("Errorrrrrr", t.message.toString())
             }
-
-            override fun onResponse(
-                call: Call<ItemResponse>,
-                response: Response<ItemResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val itemList: ItemResponse? = response.body()
-                    Log.i("Responseresult", "$itemList")
-
-//                    val itemResponseJsonString = Gson().toJson(itemList)
-//                    setUpUI()
-                } else {
-                    val rc = response.code()
-                    when(rc) {
-                        400 -> {
-                            Log.e("Error 400", "Bad connection")
-                        }
-                        404 -> {
-                            Log.e("Error 404", "Not Found")
-                        }
-                        else -> {
-                            Log.e("Error", "Generic Error")
-                        }
-                    }
-                }
+            override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
+                setUpRecyclerView(response.body()!!)
+                Log.i("onResponse", "${response.body()!!.data[0].title}")
             }
-
         })
     }
 
-    fun setUpUI() {
-        val itemList = Gson().fromJson("", ItemResponse::class.java)
-        for (i in itemList.data.indices) {
-            Log.i("Item Name", itemList.data[i].title)
+    private fun setUpRecyclerView(itemList: ItemResponse) {
+        rv_item_list.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = ItemAdapter(itemList)
         }
-    }
 
-//    private fun getItemList() {
-//        mService.getWeather().enqueue(object: retrofit2.Callback<MutableList<ItemModel>> {
-//            override fun onFailure(call: Call<MutableList<ItemModel>>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onResponse(call: Call<MutableList<ItemModel>>, response: Response<MutableList<ItemModel>>) {
-//                adapter = ItemAdapter(baseContext, response.body() as MutableList<ItemModel>)
-//                adapter.notifyDataSetChanged()
-//                rv_item_list.adapter
-//            }
-//        })
-//    }
-//
-//    private fun generateDummyList(size: Int): List<ItemModel> {
-//        val list = ArrayList<ItemModel>()
-//        for (i in 0 until size) {
-//            val drawable = R.drawable.ic_launcher_background
-//            val item = ItemModel(drawable, "Item $i")
-//            list += item
+//        binding.rvItemList.apply {
+//            layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = ItemAdapter(itemList)
 //        }
-//        return list
-//    }
+    }
 }
