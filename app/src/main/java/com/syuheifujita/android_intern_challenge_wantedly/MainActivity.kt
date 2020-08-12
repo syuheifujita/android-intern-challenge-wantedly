@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpRecyclerView(itemList: ItemResponse) {
         binding.rvItemList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = ItemAdapter(itemList)
+            adapter = ItemAdapter(context, itemList)
         }
     }
 }
