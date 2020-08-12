@@ -3,11 +3,12 @@ package com.syuheifujita.android_intern_challenge_wantedly
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient
+import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
 import com.syuheifujita.android_intern_challenge_wantedly.model.*
-import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,12 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         getClient("java", 3)
     }
@@ -45,14 +45,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView(itemList: ItemResponse) {
-        rv_item_list.apply {
+        binding.rvItemList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = ItemAdapter(itemList)
         }
-
-//        binding.rvItemList.apply {
-//            layoutManager = LinearLayoutManager(this@MainActivity)
-//            adapter = ItemAdapter(itemList)
-//        }
     }
 }
