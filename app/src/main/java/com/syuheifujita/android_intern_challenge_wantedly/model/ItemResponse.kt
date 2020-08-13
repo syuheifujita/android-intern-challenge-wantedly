@@ -7,22 +7,22 @@ data class ItemResponse (
 )
 
 data class Data (
-    val title: String,
-    val looking_for: String,
-    val image: Image,
-    val company: Company
+    val title: String? = null,
+    val looking_for: String? = null,
+    val image: Image? = null,
+    val company: Company? = null
 ): Serializable
 
 data class Image (
-    val original: String
+    val original: String? = null
 ): Serializable
 
 data class Company (
-    val name: String,
-    val url: String,
-    val avatar: Avatar
+    val name: String? = null,
+    val url: String? = null,
+    val avatar: Avatar? = null
 ): Serializable
 
 data class Avatar (
-    val original: String
+    val original: String? = null
 ): Serializable
