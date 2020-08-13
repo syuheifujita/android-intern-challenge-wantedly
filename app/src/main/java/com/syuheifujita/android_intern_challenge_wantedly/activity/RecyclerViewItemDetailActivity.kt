@@ -1,12 +1,11 @@
-package com.syuheifujita.android_intern_challenge_wantedly
+package com.syuheifujita.android_intern_challenge_wantedly.activity
 
-import android.icu.text.CaseMap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.squareup.picasso.Picasso
+import com.syuheifujita.android_intern_challenge_wantedly.R
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityRecyclerViewItemDetailBinding
-import com.syuheifujita.android_intern_challenge_wantedly.model.Avatar
 
 class RecyclerViewItemDetailActivity : AppCompatActivity() {
 
@@ -14,7 +13,9 @@ class RecyclerViewItemDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_recycler_view_item_detail)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_recycler_view_item_detail
+        )
 
         val imageUrl = intent.getStringExtra("image")
         val lookingFor = intent.getStringExtra("lookingFor")

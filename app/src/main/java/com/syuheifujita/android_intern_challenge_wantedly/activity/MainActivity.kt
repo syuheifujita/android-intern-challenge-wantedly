@@ -1,10 +1,13 @@
-package com.syuheifujita.android_intern_challenge_wantedly
+package com.syuheifujita.android_intern_challenge_wantedly.activity
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.syuheifujita.android_intern_challenge_wantedly.Constant
+import com.syuheifujita.android_intern_challenge_wantedly.ItemAdapter
+import com.syuheifujita.android_intern_challenge_wantedly.R
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
@@ -20,7 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
 
         getClient("java", 3)
     }
@@ -46,7 +51,11 @@ class MainActivity : AppCompatActivity() {
     private fun setUpRecyclerView(itemList: ItemResponse) {
         binding.rvItemList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = ItemAdapter(context, itemList)
+            adapter =
+                ItemAdapter(
+                    context,
+                    itemList
+                )
         }
     }
 }
