@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syuheifujita.android_intern_challenge_wantedly.activity.RecyclerViewItemDetailActivity
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ItemViewBinding
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
-import kotlinx.android.synthetic.main.activity_recycler_view_item_detail.view.*
 
 class ItemAdapter(private val context: Context, private val itemList: ItemResponse): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
 
@@ -50,9 +48,5 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
         var tvTitle: TextView = binding.tvTitle
         var ivAvatar: ImageView = binding.ivAvatar
         var tvCompanyName: TextView = binding.tvCompanyName
-
-        init {
-            val position: Int = adapterPosition
-        }
     }
 }
