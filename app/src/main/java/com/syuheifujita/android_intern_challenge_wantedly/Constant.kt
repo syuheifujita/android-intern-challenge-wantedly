@@ -5,5 +5,5 @@ import com.syuheifujita.android_intern_challenge_wantedly.api.ApiClient
 import retrofit2.Retrofit
 
 object Constant {
-    val BASE_URL = "https://www.wantedly.com/"
+    const val BASE_URL = "https://www.wantedly.com/"
 }
