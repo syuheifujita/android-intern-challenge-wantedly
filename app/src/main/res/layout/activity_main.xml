@@ -15,7 +15,7 @@
             android:textSize="@dimen/tv_title_24sp"/>
 
         <SearchView
-            android:id="@+id/search_view"
+            android:id="@+id/sv_rv_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
