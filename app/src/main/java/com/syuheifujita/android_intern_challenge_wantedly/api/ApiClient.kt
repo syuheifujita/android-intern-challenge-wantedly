@@ -1,17 +1,5 @@
 package com.syuheifujita.android_intern_challenge_wantedly.api
 
-import android.util.Log
-import com.google.gson.Gson
-import com.syuheifujita.android_intern_challenge_wantedly.Constant
-import com.syuheifujita.android_intern_challenge_wantedly.MainActivity
-import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
-import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
 object ApiClient {
 //    fun getClient (language: String, page: Int) {
 //        val retrofit: Retrofit = Retrofit.Builder()
