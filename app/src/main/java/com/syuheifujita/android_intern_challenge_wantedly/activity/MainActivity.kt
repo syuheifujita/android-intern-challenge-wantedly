@@ -11,36 +11,44 @@ import com.syuheifujita.android_intern_challenge_wantedly.ItemAdapter
 import com.syuheifujita.android_intern_challenge_wantedly.R
 import com.syuheifujita.android_intern_challenge_wantedly.`interface`.ItemService
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ActivityMainBinding
+import com.syuheifujita.android_intern_challenge_wantedly.model.Data
 import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var itemList: ItemResponse
-    private lateinit var filteredItemList: ItemResponse
+    private var itemList: ItemResponse? = null
+//    private var filteredItemList: ItemResponse? = null
+    private var filteredItemList = mutableListOf<ItemResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        getClient("java", 3)
+        getClient("java", 0)
 
         binding.svRvItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                (0 until itemList.data.size)
-                    .filter { itemList.data[it].title!!.toLowerCase().contains(query!!.toLowerCase()) }
-                    .mapTo(filteredItemList) { itemList.data[it] }
+
+                filteredItemList.clear()
+
+                (0 until itemList!!.data!!.size)
+                    .filter { itemList!!.data!![it].company!!.name!!.toLowerCase().contains(query!!.toLowerCase()) }
+                    .mapTo(filteredItemList) { itemList!! }
 
                 binding.rvItemList.apply {
-                    adapter = ItemAdapter(context, filteredItemList)
+                    adapter = ItemAdapter(context, itemList!!)
                 }
+
+                Log.i("query: " , "${query}")
+
+                getClient(query!!, 0)
 
                 return true
             }
@@ -69,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
                 itemList = response.body()!!
                 setUpRecyclerView(response.body()!!)
-                Log.i("onResponse", "${response.body()!!.data[0].title}")
+                Log.i("onResponse", "${response.body()!!.data!![0].title}")
             }
         })
     }

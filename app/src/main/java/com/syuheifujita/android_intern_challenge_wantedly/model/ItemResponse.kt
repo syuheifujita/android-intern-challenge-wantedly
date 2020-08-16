@@ -3,7 +3,7 @@ package com.syuheifujita.android_intern_challenge_wantedly.model
 import java.io.Serializable
 
 data class ItemResponse (
-    val data: MutableList<Data>
+    val data: List<Data>? = null
 )
 
 data class Data (

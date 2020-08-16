@@ -21,7 +21,7 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem = itemList.data[position]
+        val currentItem = itemList.data!![position]
 
         Picasso.get().load(currentItem.image?.original).into(holder.ivImageUrl)
         holder.tvLookingFor.text = currentItem.looking_for
@@ -40,7 +40,7 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
         }
     }
 
-    override fun getItemCount(): Int = itemList.data.size
+    override fun getItemCount(): Int = itemList.data!!.size
 
     class ItemViewHolder(val binding: ItemViewBinding): RecyclerView.ViewHolder(binding.root) {
         var ivImageUrl: ImageView = binding.ivImageUrl
