@@ -17,7 +17,6 @@ APIからデータを取得して表示することで精一杯で，今回は�
 |募集一覧画面|募集詳細画面|検索機能（WIP）|
 |-----|-----|-----|
 | ![home](https://user-images.githubusercontent.com/38001967/90346387-663ed780-e063-11ea-9997-34653ab42063.gif) | ![detail](https://user-images.githubusercontent.com/38001967/90346391-7c4c9800-e063-11ea-9205-156232078713.gif) | ![search](https://user-images.githubusercontent.com/38001967/90346398-8cfd0e00-e063-11ea-9801-d0f0876ae2ed.gif) |
-|-----|-----|-----|
 | issue [#1](https://github.com/syuheifujita/android-intern-challenge-wantedly/issues/1) | issue [#2](https://github.com/syuheifujita/android-intern-challenge-wantedly/issues/2) | issue [#3](https://github.com/syuheifujita/android-intern-challenge-wantedly/issues/3) |
 
 # 課題詳細
