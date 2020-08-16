@@ -10,7 +10,7 @@ APIからデータを取得して表示することで精一杯で，今回は�
 
 # その他
 ## ・工夫した点
-①メインとなる，募集一覧画面は，「recyclerview + databinding + retrofit」で実装をしました．
+メインとなる，募集一覧画面は，「recyclerview + databinding + retrofit」で実装をしました．
 
 # 画面イメージ
 |募集一覧画面|募集詳細画面|検索機能（WIP）|
