@@ -18,14 +18,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var itemList: ItemResponse? = null
-//    private var filteredItemList: ItemResponse? = null
-    private var filteredItemList = mutableListOf<ItemResponse>()
+    private var itemList = mutableListOf<Data>()
+    private var filteredItemList = mutableListOf<Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +33,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.svRvItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
                 filteredItemList.clear()
+                for (i in itemList.indices) {
+                    if (itemList[i].company!!.name!!.toLowerCase().contains(query!!.toLowerCase())) {
 
-                (0 until itemList!!.data!!.size)
-                    .filter { itemList!!.data!![it].company!!.name!!.toLowerCase().contains(query!!.toLowerCase()) }
-                    .mapTo(filteredItemList) { itemList!! }
+                    }
+                }
 
                 binding.rvItemList.apply {
                     adapter = ItemAdapter(context, itemList!!)
                 }
 
                 Log.i("query: " , "${query}")
-
                 getClient(query!!, 0)
-
                 return true
             }
 
@@ -57,10 +53,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-    }
-
-    private fun filer(text: String?) {
-
     }
 
     private fun getClient (language: String, page: Int) {
@@ -75,14 +67,14 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Errorrrrrr", t.message.toString())
             }
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
-                itemList = response.body()!!
-                setUpRecyclerView(response.body()!!)
+                itemList = response.body()!!.data!!
+                setUpRecyclerView(response.body()!!.data!!)
                 Log.i("onResponse", "${response.body()!!.data!![0].title}")
             }
         })
     }
 
-    private fun setUpRecyclerView(itemList: ItemResponse) {
+    private fun setUpRecyclerView(itemList: MutableList<Data>) {
         binding.rvItemList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = ItemAdapter(context, itemList)
