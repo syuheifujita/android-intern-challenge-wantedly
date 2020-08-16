@@ -21,6 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var itemList: ItemResponse
+    private lateinit var filteredItemList: ItemResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +32,27 @@ class MainActivity : AppCompatActivity() {
 
         getClient("java", 3)
 
-        val serchView = binding.svRvItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.svRvItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                (0 until itemList.data.size)
+                    .filter { itemList.data[it].title!!.toLowerCase().contains(query!!.toLowerCase()) }
+                    .mapTo(filteredItemList) { itemList.data[it] }
+
+                binding.rvItemList.apply {
+                    adapter = ItemAdapter(context, filteredItemList)
+                }
+
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return false
+                return true
             }
         })
+    }
+
+    private fun filer(text: String?) {
+
     }
 
     private fun getClient (language: String, page: Int) {
@@ -53,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Errorrrrrr", t.message.toString())
             }
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
+                itemList = response.body()!!
                 setUpRecyclerView(response.body()!!)
                 Log.i("onResponse", "${response.body()!!.data[0].title}")
             }
@@ -62,11 +77,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpRecyclerView(itemList: ItemResponse) {
         binding.rvItemList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter =
-                ItemAdapter(
-                    context,
-                    itemList
-                )
+            adapter = ItemAdapter(context, itemList)
         }
     }
 }
