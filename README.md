@@ -1,3 +1,10 @@
 # android-intern-challenge-wantedly
 
-![screencapture-docs-google-document-d-1VGpdf4PUVfTTVvA-9tTMF-yhCGnZqL394uxElgSFIcM-edit-2020-08-05-15_33_02](https://user-images.githubusercontent.com/38001967/89379653-1ee64c00-d731-11ea-9411-f01c6913c66b.png)
+
+# 画面イメージ
+|募集一覧画面|募集詳細画面|検索機能（WIP）|
+|-----|-----|-----|
+| ![home](https://user-images.githubusercontent.com/38001967/90346387-663ed780-e063-11ea-9997-34653ab42063.gif) | ![detail](https://user-images.githubusercontent.com/38001967/90346391-7c4c9800-e063-11ea-9205-156232078713.gif) | ![search](https://user-images.githubusercontent.com/38001967/90346398-8cfd0e00-e063-11ea-9801-d0f0876ae2ed.gif) |
+
+#課題詳細
+https://docs.google.com/document/d/1VGpdf4PUVfTTVvA-9tTMF_yhCGnZqL394uxElgSFIcM/edit#
