@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.syuheifujita.android_intern_challenge_wantedly.activity.RecyclerViewItemDetailActivity
 import com.syuheifujita.android_intern_challenge_wantedly.databinding.ItemViewBinding
-import com.syuheifujita.android_intern_challenge_wantedly.model.ItemResponse
+import com.syuheifujita.android_intern_challenge_wantedly.model.Data
 
-class ItemAdapter(private val context: Context, private val itemList: ItemResponse): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
+class ItemAdapter(private val context: Context, private val itemList: MutableList<Data>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ItemViewHolder {
         val binding: ItemViewBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_view, parent, false)
@@ -21,7 +21,7 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem = itemList.data[position]
+        val currentItem = itemList[position]
 
         Picasso.get().load(currentItem.image?.original).into(holder.ivImageUrl)
         holder.tvLookingFor.text = currentItem.looking_for
@@ -40,7 +40,7 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
         }
     }
 
-    override fun getItemCount(): Int = itemList.data.size
+    override fun getItemCount(): Int = itemList.size
 
     class ItemViewHolder(val binding: ItemViewBinding): RecyclerView.ViewHolder(binding.root) {
         var ivImageUrl: ImageView = binding.ivImageUrl

@@ -7,19 +7,20 @@
         android:orientation="vertical"
         android:padding="@dimen/space_8dp"
         tools:context=".activity.MainActivity">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/page_title_bosyu"
             android:textSize="@dimen/tv_title_24sp"/>
-
+        <SearchView
+            android:id="@+id/sv_rv_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_item_list"
             android:padding="@dimen/space_8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_view" />
-
     </LinearLayout>
 </layout>
