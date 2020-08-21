@@ -1,9 +1,5 @@
 # android-intern-challenge-wantedly
 
-# テーマ
-APIからデータを取得して表示することで精一杯で，今回はテーマを決めた実装まで作り込むことができませんでした．しかし今回の課題をやる以前はREST通信を使った実装もままならなかった私ですが，今回の課題を通し私自身レベルアップすることができました．
-このような機会をいただき大変ありがとうございました．
-
 # オプショナル
 ### ①募集一覧をタップした後の詳細画面
 (issue [#2](https://github.com/syuheifujita/android-intern-challenge-wantedly/issues/2))
