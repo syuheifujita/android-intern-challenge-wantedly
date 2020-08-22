@@ -31,11 +31,11 @@ class ItemAdapter(private val context: Context, private val itemList: ItemRespon
 
         holder.binding.llRvItem.setOnClickListener {
             val intent = Intent(context, RecyclerViewItemDetailActivity::class.java)
-            intent.putExtra("image", currentItem.image?.original)
-            intent.putExtra("lookingFor", currentItem.looking_for)
-            intent.putExtra("title", currentItem.title)
-            intent.putExtra("avatar", currentItem.company?.avatar?.original)
-            intent.putExtra("companyName", currentItem.company?.name)
+            intent.putExtra(Constant.EXTRA_MESSAGE_IMAGE_URL, currentItem.image?.original)
+            intent.putExtra(Constant.EXTRA_MESSAGE_LOOKING_FOR, currentItem.looking_for)
+            intent.putExtra(Constant.EXTRA_MESSAGE_TITLE, currentItem.title)
+            intent.putExtra(Constant.EXTRA_MESSAGE_AVATAR, currentItem.company?.avatar?.original)
+            intent.putExtra(Constant.EXTRA_MESSAGE_COMPANY_NAME, currentItem.company?.name)
             context.startActivity(intent)
         }
     }
